@@ -11,7 +11,9 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/a
 FROM scratch
 USER 1000
 WORKDIR /app
+VOLUME /app/uploads
 COPY --chown=1000:1000 --from=build /go/bin/app.bin /app/app.bin
+COPY --chown=1000:1000 uploads /app/uploads
 EXPOSE 9999
 
 # Run
